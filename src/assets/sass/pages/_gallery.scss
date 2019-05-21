@@ -1,0 +1,11 @@
+.gallery {
+  display: flex;
+  .photo {
+    height: 200px;
+    width: 200px;
+  }
+  .fullscreen {
+    height: 700px;
+    width: 1000px;
+  }
+}

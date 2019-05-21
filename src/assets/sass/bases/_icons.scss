@@ -1,0 +1,12 @@
+@mixin arrow($color: #000, $rotate: -45deg) {
+    content: " ";
+    position: absolute;
+    right: 20px;
+    border: solid $color;
+    border-width: 0 1px 1px 0;
+    display: inline-block;
+    top: 45%;
+    padding: 3px;
+    -webkit-transform: rotate($rotate);
+    transform: rotate($rotate);
+}
