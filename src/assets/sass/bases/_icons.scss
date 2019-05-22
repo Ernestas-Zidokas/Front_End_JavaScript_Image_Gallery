@@ -3,10 +3,10 @@
     position: absolute;
     // right: 20px;
     border: solid $color;
-    border-width: 0 2px 2px 0;
+    border-width: 0 5px 5px 0;
     display: inline-block;
     top: 45%;
-    padding: 15px;
+    padding: 30px;
     -webkit-transform: rotate($rotate);
     transform: rotate($rotate);
 }

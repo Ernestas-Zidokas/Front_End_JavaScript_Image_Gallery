@@ -13,6 +13,9 @@ function createGallery() {
 
     img.addEventListener('click', event => {
       photo.fullscreen = !photo.fullscreen;
+      if(document.querySelector('#gallery-fullscreen').contains(document.querySelector('.fullscreen-div'))) {
+        document.querySelector('#gallery-fullscreen').removeChild(document.querySelector('.fullscreen-div'));
+      }
 
       if(photo.fullscreen){
         let divFullScreen = document.createElement('div');
@@ -22,34 +25,66 @@ function createGallery() {
         imgFullScreen.src = 'assets/images/' + photo.link;
         imgFullScreen.classList.add('fullscreen');
 
+        let beforeImg = document.createElement('img');
+        beforeImg.src = 'assets/images/' + photoArray[index == 0 ? photoArray.length - 1 : index - 1].link;
+        beforeImg.classList.add('before-img');
+
+        let afterImg = document.createElement('img');
+        afterImg.src = 'assets/images/' + photoArray[index == photoArray.length - 1 ? 0 : index + 1].link;
+        afterImg.classList.add('after-img');
+
         let arrowLeft = document.createElement('div');
         arrowLeft.classList.add('arrow-left');
+
         arrowLeft.addEventListener('click', event => {
-          console.log('kaire');
-        })
+          if(index == 0){
+            index = photoArray.length - 1
+          } else {
+            index--;
+          }
+          document.querySelector('.fullscreen-div').removeChild(document.querySelector('.fullscreen'));
+          let imgFullScreen = document.createElement('img');
+          imgFullScreen.src = 'assets/images/' + photoArray[index].link;
+          imgFullScreen.classList.add('fullscreen');
+
+          imgFullScreen.addEventListener('click', event => {
+            photo.fullscreen = !photo.fullscreen;
+            document.querySelector('#gallery-fullscreen').removeChild(divFullScreen);
+          })
+          divFullScreen.appendChild(imgFullScreen);
+        });
 
         let arrowRight = document.createElement('div');
         arrowRight.classList.add('arrow-right');
-
         arrowRight.addEventListener('click', event => {
-          console.log('desine');
+          if(index == photoArray.length - 1){
+            index = 0;
+          } else {
+            index++;
+          }
           document.querySelector('.fullscreen-div').removeChild(document.querySelector('.fullscreen'));
           let imgFullScreen = document.createElement('img');
-          index++;
           imgFullScreen.src = 'assets/images/' + photoArray[index].link;
           imgFullScreen.classList.add('fullscreen');
+
+          imgFullScreen.addEventListener('click', event => {
+            photo.fullscreen = !photo.fullscreen;
+            document.querySelector('#gallery-fullscreen').removeChild(divFullScreen);
+          });
           divFullScreen.appendChild(imgFullScreen);
-        })
+        });
 
         imgFullScreen.addEventListener('click', event => {
           photo.fullscreen = !photo.fullscreen;
-          document.querySelector('#gallery').removeChild(divFullScreen);
-        })
+          document.querySelector('#gallery-fullscreen').removeChild(divFullScreen);
+        });
 
+        divFullScreen.appendChild(beforeImg);
+        divFullScreen.appendChild(afterImg);
         divFullScreen.appendChild(arrowLeft);
         divFullScreen.appendChild(imgFullScreen);
         divFullScreen.appendChild(arrowRight);
-        document.querySelector('#gallery').appendChild(divFullScreen);
+        document.querySelector('#gallery-fullscreen').appendChild(divFullScreen);
       }
     });
 
