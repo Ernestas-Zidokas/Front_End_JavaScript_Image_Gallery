@@ -1,11 +1,30 @@
 .gallery {
   display: flex;
+  position: relative;
   .photo {
     height: 200px;
     width: 200px;
   }
-  .fullscreen {
-    height: 700px;
-    width: 1000px;
+  .fullscreen-div {
+    .arrow-left {
+      &::before {
+        @include arrow($rotate: 140deg);
+        left: -35px;
+      }
+    }
+    .arrow-right {
+      &::after {
+        @include arrow($rotate: -45deg);
+        right: -35px;
+      }
+    }
+    top: 200px;
+    left: 250px;
+    position: absolute;
+    .fullscreen {
+      z-index: 999;
+      height: 700px;
+      width: 1000px;
+    }
   }
 }
