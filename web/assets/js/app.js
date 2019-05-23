@@ -43,19 +43,34 @@ function createGallery() {
             index--;
           }
           document.querySelector('.fullscreen-div').removeChild(document.querySelector('.fullscreen'));
+          document.querySelector('.fullscreen-div').removeChild(document.querySelector('.before-img'));
+          document.querySelector('.fullscreen-div').removeChild(document.querySelector('.after-img'));
+
           let imgFullScreen = document.createElement('img');
           imgFullScreen.src = 'assets/images/' + photoArray[index].link;
           imgFullScreen.classList.add('fullscreen');
+
+          let beforeImg = document.createElement('img');
+          beforeImg.src = 'assets/images/' + photoArray[index == 0 ? photoArray.length - 1 : index - 1].link;
+          beforeImg.classList.add('before-img');
+
+          let afterImg = document.createElement('img');
+          afterImg.src = 'assets/images/' + photoArray[index == photoArray.length - 1 ? 0 : index + 1].link;
+          afterImg.classList.add('after-img');
 
           imgFullScreen.addEventListener('click', event => {
             photo.fullscreen = !photo.fullscreen;
             document.querySelector('#gallery-fullscreen').removeChild(divFullScreen);
           })
+
+          divFullScreen.appendChild(beforeImg);
+          divFullScreen.appendChild(afterImg);
           divFullScreen.appendChild(imgFullScreen);
         });
 
         let arrowRight = document.createElement('div');
         arrowRight.classList.add('arrow-right');
+
         arrowRight.addEventListener('click', event => {
           if(index == photoArray.length - 1){
             index = 0;
@@ -63,6 +78,9 @@ function createGallery() {
             index++;
           }
           document.querySelector('.fullscreen-div').removeChild(document.querySelector('.fullscreen'));
+          document.querySelector('.fullscreen-div').removeChild(document.querySelector('.before-img'));
+          document.querySelector('.fullscreen-div').removeChild(document.querySelector('.after-img'));
+
           let imgFullScreen = document.createElement('img');
           imgFullScreen.src = 'assets/images/' + photoArray[index].link;
           imgFullScreen.classList.add('fullscreen');
@@ -71,6 +89,17 @@ function createGallery() {
             photo.fullscreen = !photo.fullscreen;
             document.querySelector('#gallery-fullscreen').removeChild(divFullScreen);
           });
+
+          let beforeImg = document.createElement('img');
+          beforeImg.src = 'assets/images/' + photoArray[index == 0 ? photoArray.length - 1 : index - 1].link;
+          beforeImg.classList.add('before-img');
+
+          let afterImg = document.createElement('img');
+          afterImg.src = 'assets/images/' + photoArray[index == photoArray.length - 1 ? 0 : index + 1].link;
+          afterImg.classList.add('after-img');
+
+          divFullScreen.appendChild(beforeImg);
+          divFullScreen.appendChild(afterImg);
           divFullScreen.appendChild(imgFullScreen);
         });
 
@@ -91,8 +120,4 @@ function createGallery() {
     div.appendChild(img);
     document.querySelector('#gallery').appendChild(div);
   });
-}
-
-function clearGallery() {
-  document.querySelector('#gallery').innerHTML = '';
 }
